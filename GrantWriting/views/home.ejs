@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grant Writing Support Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-section {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 70px 20px;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: fadeInDown 1.5s;
+        }
+        .hero-section p {
+            font-size: 1rem;
+            animation: fadeInUp 1.5s;
+        }
+        .btn-primary {
+            animation: pulse 2s infinite;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .navbar {
+            background-color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .navbar-brand {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #00d4ff;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            min-height: 60px; /* Ensure the footer takes up enough space */
+        }
+        .footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Grant Support</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {{ currentPath === '/' ? 'active' : '' }}" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/draftEditor">Draft Editor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/resources">Resources</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <h1 class="animate__animated animate__fadeInDown">Welcome to the Grant Writing Resource Hub.</h1>
+        <p class="animate__animated animate__fadeInUp">Providing the tools you need to write compelling grant proposals and build detailed profiles.</p>
+    </section>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center animate__animated animate__fadeInLeft">
+                    <div class="card-body">
+                        <form action="/draftEditor" method="get">
+                            <h5 class="card-title">Draft Editor</h5>
+                            <p class="card-text">Begin drafting your grant proposals here.</p>
+                            <button type="submit" class="btn btn-primary">Go to Draft Editor</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center animate__animated animate__fadeInUp">
+                    <div class="card-body">
+                        <form action="/resources" method="get">
+                            <h5 class="card-title">Resources</h5>
+                            <p class="card-text">Explore guides, tips, and resources to enhance your grant writing skills.</p>
+                            <button type="submit" class="btn btn-primary">Explore Resources</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center animate__animated animate__fadeInRight">
+                    <div class="card-body">
+                        <h5 class="card-title">Organization Profile</h5>
+                        <p class="card-text">Create and maintain detailed profiles for your organization.</p>
+                        <a href="#orgProfile" class="btn btn-primary">View Profiles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+        <p>&copy; Pratik Grant Writing Support Tool.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const currentPath = window.location.pathname;
+    </script>
+</body>
+</html>

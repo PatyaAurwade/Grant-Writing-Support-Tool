@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draft Editor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        background-color: #e9f4f8;
+        font-family: 'Arial', sans-serif;
+      }
+
+      .navbar {
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(101, 107, 255, 0.4);
+        transition: all 0.4s ease-in-out;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(90deg, #2575fc, #6a11cb);
+        box-shadow: 0 6px 20px rgba(101, 107, 255, 0.6);
+      }
+
+      .ai-magic-btn {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        box-shadow: 0 4px 15px rgba(101, 107, 255, 0.4);
+        transition: all 0.4s ease-in-out;
+      }
+
+      .ai-magic-btn:hover {
+        background: linear-gradient(90deg, #2575fc, #6a11cb);
+        box-shadow: 0 6px 20px rgba(101, 107, 255, 0.6);
+      }
+
+      .voice-dictation-btn {
+        background: linear-gradient(90deg, #2575fc, #6a11cb);
+        box-shadow: 0 4px 15px rgba(101, 107, 255, 0.4);
+        transition: all 0.4s ease-in-out;
+      }
+
+      .voice-dictation-btn:hover {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        box-shadow: 0 6px 20px rgba(101, 107, 255, 0.6);
+      }
+
+      .textarea, .textarea-result {
+        height: 200px;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+
+      .btn-container {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-start;
+        margin-top: 20px;
+      }
+
+      .editor-container {
+        margin: 50px auto;
+        max-width: 800px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand {
+        font-weight: bold;
+      }
+
+      .navbar-toggler {
+        border: none;
+      }
+
+      .navbar-toggler-icon {
+        background-color: #6a11cb;
+      }
+
+      .navbar-nav .nav-link {
+        font-size: 1.1rem;
+      }
+
+      .navbar-nav .nav-link.active {
+        font-weight: bold;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+        background-color: #f1f1f1;
+        font-size: 0.9rem;
+      }
+
+      .btn-clear {
+        animation: bounce 0.5s ease-in-out;
+        background-color: #e74c3c;
+        border: none;
+        padding: 10px 30px;
+        color: white;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .btn-clear:hover {
+        background-color: #c0392b;
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">Grant Support</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/draftEditor">Draft Editor</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/resources">Resources</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container editor-container">
+      <h1 class="text-center mb-4">Draft Editor</h1>
+      <textarea
+        id="draftText"
+        class="form-control textarea"
+        placeholder="Compose your grant proposal here..."
+      ></textarea>
+
+      <div class="btn-container">
+        <button id="analyzeButton" class="btn btn-primary">
+          Analyze Draft
+        </button>
+
+        <button id="suggestButton" class="btn ai-magic-btn">
+          <i class="fas fa-magic"></i> Get Suggestions
+        </button>
+
+        <button id="voiceButton" class="btn voice-dictation-btn">
+          <i class="fas fa-microphone"></i> Voice Dictation
+        </button>
+
+        <button id="clearButton" class="btn btn-clear">Clear</button>
+      </div>
+
+      <h3 class="mt-4">Generated Suggestions / Analysis</h3>
+      <textarea
+        id="generatedText"
+        class="form-control textarea-result"
+        placeholder="AI-generated content will appear here..."
+      >
+      </textarea>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document
+        .getElementById("analyzeButton")
+        .addEventListener("click", async () => {
+          const draft = document.getElementById("draftText").value;
+          if (!draft.trim()) {
+            alert("Please write something in the draft before analyzing.");
+            return;
+          }
+          alert("Analyzing the draft... (AI feature to be implemented)");
+          const response = await fetch("/analyse", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json", 
+            },
+            body: JSON.stringify({ text: draft }), 
+          });
+          const result = await response.json();
+          document.getElementById("generatedText").value = result.res;
+        });
+
+      document
+        .getElementById("suggestButton")
+        .addEventListener("click", async () => {
+          const draft = document.getElementById("draftText").value;
+          if (!draft.trim()) {
+            alert("Please write something in the draft to get suggestions.");
+            return;
+          }
+          alert("Fetching suggestions... (AI feature to be implemented)");
+          const response = await fetch("/suggest", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json", 
+            },
+            body: JSON.stringify({ text: draft }), 
+          });
+          const result = await response.json();
+          document.getElementById("generatedText").value = result.res;
+        });
+
+        const voiceButton = document.getElementById("voiceButton");
+
+voiceButton.addEventListener("click", () => {
+  if ("webkitSpeechRecognition" in window) {
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      alert(`You said: ${transcript}`);
+      document.getElementById("draftText").value = transcript;
+    };
+    recognition.start();
+  } else {
+    alert("Your browser does not support voice dictation.");
+  }
+});
+
+
+      document.getElementById("clearButton").addEventListener("click", () => {
+        document.getElementById("draftText").value = "";
+        document.getElementById("generatedText").value = "";
+
+
+      });
+    </script>
+
+    <footer class="footer">
+      <p>© 2024 Grant Support | All Rights Reserved</p>
+    </footer>
+  </body>
+</html>
